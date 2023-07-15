@@ -12,7 +12,7 @@ import shutil
 from datetime import datetime
 
 
-min_publications=1
+min_publications=0
 
 
 def save_old_data():

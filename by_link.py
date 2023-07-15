@@ -246,7 +246,7 @@ global_links.append(key)
 save_old_data()
 
 depth = -1
-while depth<10:
+while depth<5:
     if not global_links:
         global_links=[]
     depth+=1
@@ -258,21 +258,16 @@ while depth<10:
     temp_links=[]
     for link in global_links:
         res=search_profile(link)
-        print(res)
         if not res:
             res=[]
-        print(res)
-
         nb=0
         for r in res:
             nb+=1
             if nb>max_authors:
                 break
             temp_links.append(r)
-        print(temp_links)
 
     global_links=temp_links
-    print(global_links)
 
 
         
