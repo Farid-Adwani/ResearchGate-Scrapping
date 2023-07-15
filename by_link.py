@@ -240,6 +240,7 @@ def search_profile(link):
 
 global_links=[]
 key=input("Enter a link : ")
+max_authors=int(input("Enter Max Authors : "))
 global_links.append(key)
 
 save_old_data()
@@ -261,7 +262,12 @@ while depth<10:
         if not res:
             res=[]
         print(res)
+
+        nb=0
         for r in res:
+            nb+=1
+            if nb>max_authors:
+                break
             temp_links.append(r)
         print(temp_links)
 
