@@ -246,7 +246,7 @@ global_links.append(key)
 save_old_data()
 
 depth = -1
-while depth<5:
+while depth<10:
     if not global_links:
         global_links=[]
     depth+=1
