@@ -81,7 +81,7 @@ def scrape_profile_data(profile_link: str):
         reads = selector.css('[data-testid="publicProfileStatsReads"]::text').get()
         citations = selector.css('[data-testid="publicProfileStatsCitations"]::text').get()
         person_name = selector.css('.nova-legacy-e-text--size-xl ::text').get()
-        profile_image = selector.css('.nova-legacy-e-avatar__img::attr(src)').get()
+        # profile_image = selector.css('.nova-legacy-e-avatar__img::attr(src)').get()
         affiliation = selector.css('.lite-page__side .gtm-institution-item .nova-legacy-v-entity-item__stack-item .nova-legacy-v-entity-item__title a::text').getall()
         
         
@@ -147,13 +147,14 @@ def scrape_profile_data(profile_link: str):
         
 
         # Download the image from the URL
+        profile_image="rrrrr"
         if profile_image:
                            
                     
-            response = requests.get(profile_image)
+            # response = requests.get(profile_image)
             image_path = 'profile_image.jpg'
-            with open(image_path, 'wb') as image_file:
-                image_file.write(response.content)
+            # with open(image_path, 'wb') as image_file:
+                # image_file.write(response.content)
 
             # Insert the image into the Excel sheet
             img = Image(image_path)
