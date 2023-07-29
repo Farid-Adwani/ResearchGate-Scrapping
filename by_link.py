@@ -114,17 +114,17 @@ def scrape_profile_data(profile_link: str):
         page.keyboard.press('Escape')
 
         cited = []
-        if selector.css(('a[data-lite*="cited"]')):
-            page.click('a[data-lite*="cited"]')
-            try:
-                page.wait_for_selector('.nova-legacy-c-modal__body-content .network-cited-modal__container a.nova-legacy-e-link', timeout=10000)
-            except TimeoutError:
-                print("Timed out waiting for the Cited links to load.")
-            cited_links = page.query_selector_all('.nova-legacy-c-modal__body-content .network-cited-modal__container a.nova-legacy-e-link')
-            for link in cited_links:
-                href = link.get_attribute('href')
-                name = link.text_content()
-                cited.append({'href': href, 'name': name})
+        # if selector.css(('a[data-lite*="cited"]')):
+        #     page.click('a[data-lite*="cited"]')
+        #     try:
+        #         page.wait_for_selector('.nova-legacy-c-modal__body-content .network-cited-modal__container a.nova-legacy-e-link', timeout=10000)
+        #     except TimeoutError:
+        #         print("Timed out waiting for the Cited links to load.")
+        #     cited_links = page.query_selector_all('.nova-legacy-c-modal__body-content .network-cited-modal__container a.nova-legacy-e-link')
+        #     for link in cited_links:
+        #         href = link.get_attribute('href')
+        #         name = link.text_content()
+        #         cited.append({'href': href, 'name': name})
 
         skills = selector.css('.js-target-skills a::text').getall()
 
@@ -179,10 +179,10 @@ def scrape_profile_data(profile_link: str):
                 sheet.cell(row=next_row, column=7, value=len(co_authors))
             if co_authors:
                 sheet.cell(row=next_row, column=8, value=' | '.join([co_author['user_name'] for co_author in co_authors]))
-            if cited:
-                sheet.cell(row=next_row, column=9, value=len(cited))
-            if cited:
-                sheet.cell(row=next_row, column=10, value=' | '.join([cited_item['name'] for cited_item in cited]))
+            # if cited:
+            #     sheet.cell(row=next_row, column=9, value=len(cited))
+            # if cited:
+            #     sheet.cell(row=next_row, column=10, value=' | '.join([cited_item['name'] for cited_item in cited]))
             if publications_number:
                 sheet.cell(row=next_row, column=11, value=int(publications_number))
             if publications:
@@ -200,6 +200,9 @@ def scrape_profile_data(profile_link: str):
 
 
         browser.close()
+        print("total ========================>  ",next_row)
+
+
         links = [author["href"] for author in co_authors]
         return links
 
@@ -229,7 +232,6 @@ def search_profile(link):
         print(f"An error occurred while scraping the profile: {str(e)}")
         print(".................................................................")
         print("")
-        
     end=time.time()
     elapsed_time = end - start
     print("Time Spent in iteration : ",elapsed_time," seconds")
@@ -261,10 +263,10 @@ while depth<100:
         res=search_profile(link)
         if not res:
             res=[]
-        nb=0
+        nn=0
         for r in res:
-            nb+=1
-            if nb>max_authors:
+            nn+=1
+            if nn>max_authors:
                 break
             temp_links.append(r)
 
